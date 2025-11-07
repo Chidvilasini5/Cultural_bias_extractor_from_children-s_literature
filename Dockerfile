@@ -1,5 +1,6 @@
-FROM python:3.12.0
+FROM python:3.12-slim
 
+# Install required system libs
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential libglib2.0-0 libgl1-mesa-glx curl && \
     rm -rf /var/lib/apt/lists/*
@@ -13,6 +14,6 @@ COPY . .
 
 ENV PYTHONUNBUFFERED=1
 ENV PORT=8080
-EXPOSE 8080
 
+EXPOSE 8080
 CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:8080", "--workers", "2", "--threads", "2", "--timeout", "120"]
