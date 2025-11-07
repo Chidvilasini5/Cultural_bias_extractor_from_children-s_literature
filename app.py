@@ -1,4 +1,7 @@
 from flask import Flask, render_template, render_template_string, request, redirect, url_for, session
+import spacy
+nlp = spacy.load("en_core_web_sm")
+
 
 # We'll import the analysis code from the user's existing script on-demand,
 # while preventing that script's plotting code from blocking the server.
@@ -100,4 +103,5 @@ def analyze():
         return redirect(url_for('home'))
 
 if __name__ == '__main__':
+
     app.run(debug=True)
