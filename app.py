@@ -1,6 +1,15 @@
 from flask import Flask, render_template, render_template_string, request, redirect, url_for, session
-import en_core_web_sm
-nlp = en_core_web_sm.load()
+
+
+import spacy
+
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    from spacy.cli import download
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
+
 
 
 # We'll import the analysis code from the user's existing script on-demand,
@@ -103,4 +112,5 @@ def analyze():
         return redirect(url_for('home'))
 
 if __name__ == '__main__':
+
     app.run(debug=True)
