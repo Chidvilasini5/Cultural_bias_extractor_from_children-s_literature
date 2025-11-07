@@ -1,8 +1,10 @@
 services:
   - type: web
-    name: fairy-tales-bias
+    name: cultural-bias-analyzer
     env: python
     plan: free
     pythonVersion: 3.12.3
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      python -m spacy download en_core_web_sm
     startCommand: gunicorn app:app
