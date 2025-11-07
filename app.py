@@ -72,6 +72,12 @@ def home():
     return render_template('index.html', report_text=report_text, error=error)
 
 
+@app.get('/health')
+def health():
+    """Simple health check endpoint for deployment platforms."""
+    return {"status": "ok"}, 200
+
+
 @app.route('/analyze', methods=['GET', 'POST'])
 def analyze():
     if request.method == 'GET':
