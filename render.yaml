@@ -3,15 +3,6 @@ services:
     name: fairy-tales-bias
     env: python
     plan: free
-    region: oregon
-    buildCommand: |
-      python -m spacy download en_core_web_sm
-      pip install --upgrade pip setuptools wheel
-      pip install -r requirements.txt
-      python -m spacy download en_core_web_sm
+    pythonVersion: 3.12.3
+    buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
-    envVars:
-      PYTHON_VERSION: 3.12
-    healthCheckPath: /health
-    autoDeploy: true
-
