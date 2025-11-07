@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fairy Tales Bias Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+    <!-- Minimal inline fallback for very old browsers -->
+    <style>
+        body { font-family: 'Poppins', system-ui, sans-serif; margin: 0; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1>Fairy Tales Bias Analysis</h1>
+            <div class="hero-callout">
+                <p>🌟 Fairy tales take us to magical worlds filled with dragons, castles, and dreams.</p>
+                <p>👦👧 But have you ever noticed how princes go on quests while princesses wait to be saved?</p>
+                <p>💭 What if everyone could be brave, smart, and strong — no matter who they are?</p>
+                <p>🔍 Here, we explore gender bias, role diversity, and stereotypes in stories to make fairy tales fair, fun, and inspiring for all children!</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2>Analyze a story</h2>
+            <article class="card analyze-form">
+                <form method="post" action="{{ url_for('analyze') }}">
+                    <input class="input" name="url" type="url" required placeholder="Paste a public story URL (e.g., Project Gutenberg)" />
+                    <button type="submit" class="btn primary">Analyze</button>
+                </form>
+            </article>
+        </section>
+
+        <section id="about" class="section">
+            <h2>At a glance</h2>
+            <p>We fetch public-domain fairy tales, run NLP with spaCy/TextBlob, and summarize three simple metrics to make bias visible at a glance.</p>
+        </section>
+
+        <section id="features" class="section">
+            <div class="card-grid">
+                <article class="card">
+                    <h3>Gender Balance</h3>
+                    <p>When stories favor one gender over another — like showing boys as brave heroes and girls as quiet helpers — that's gender bias. It gives unfair power or importance to one side.</p>
+                </article>
+                <article class="card">
+                    <h3>Role Diversity</h3>
+                    <p>Fairy tales often put characters into the same roles again and again, like “princess needs saving” or “prince fights the dragon.” Role diversity means letting anyone be the hero, villain, leader, or problem-solver — no limits!</p>
+                </article>
+                <article class="card">
+                    <h3>Stereotype Signals</h3>
+                    <p>These are fixed ideas about how boys and girls should act or feel. For example, saying “girls are emotional” or “boys don’t cry.” Stereotypes in stories can make children believe they have to behave a certain way to fit in.</p>
+                </article>
+            </div>
+        </section>
+        {% if error %}
+        <section class="section">
+            <article class="card error">
+                <h3>Analysis failed</h3>
+                <pre style="white-space:pre-wrap; margin:0; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">{{ error }}</pre>
+            </article>
+        </section>
+        {% endif %}
+
+        {% if report_text %}
+        <section class="section">
+            <article class="card report">
+                <h3 style="margin-bottom:.5rem">Report</h3>
+                <pre style="white-space:pre-wrap; margin:0; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">{{ report_text }}</pre>
+            </article>
+        </section>
+        {% endif %}
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2025 Fairy Tales Bias Analysis</div>
+    </footer>
+</body>
+</html>

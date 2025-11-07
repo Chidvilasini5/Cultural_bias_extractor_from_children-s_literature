@@ -1,0 +1,253 @@
+/* Minimal, clean theme */
+:root{
+  /* Light sky/teal theme */
+  --bg: #f8fbff; /* near-white fallback */
+  --bg-gradient:
+    radial-gradient(1000px 600px at 15% 0%, rgba(255,247,237,.85), rgba(255,247,237,0) 60%), /* peach */
+    radial-gradient(900px 520px at 85% 12%, rgba(238,242,255,.8), rgba(238,242,255,0) 55%),   /* lavender */
+    radial-gradient(1000px 640px at 50% 100%, rgba(236,254,255,.8), rgba(236,254,255,0) 60%), /* aqua */
+    linear-gradient(180deg, #ffffff 0%, #fafcff 100%);
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --border: #e6edf7;
+  --primary-blue: #0ea5e9;   /* sky-500 */
+  --primary-purple: #14b8a6; /* teal-500 */
+  --primary: var(--primary-blue);
+  --gradient-accent: linear-gradient(90deg, var(--primary-purple), var(--primary-blue));
+  --shadow: 0 10px 24px rgba(2, 6, 23, 0.06);
+  --radius: 12px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+  color:var(--text);
+  background: var(--bg);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed; /* pleasant, subtle parallax */
+}
+
+.container{width:min(960px, 92%); margin-inline:auto}
+
+/* Header */
+.site-header{
+  padding:72px 0 40px;
+  text-align:center;
+  /* distinct hero background */
+  background: linear-gradient(180deg, rgba(14,165,233,0.22), rgba(20,184,166,0.12) 70%);
+  border-bottom: 1px solid var(--border);
+}
+.site-header h1{
+  margin:0 0 10px;
+  font-size:clamp(2rem, 2vw + 1.2rem, 2.6rem);
+  letter-spacing:-0.02em;
+}
+.subtitle{ margin:0 auto; color:var(--muted); font-size:1.06rem; max-width:68ch }
+
+/* Hero callout block */
+.hero-callout{
+  margin:16px auto 0;
+  padding:16px 18px;
+  background: var(--surface);
+  border:1px solid var(--border);
+  border-left:5px solid var(--primary-blue);
+  border-radius:12px;
+  max-width: 900px;
+}
+.hero-callout p{
+  margin:0 0 8px 0;
+  color: var(--text);
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+.hero-callout p:last-child{ margin-bottom:0 }
+
+/* Sections */
+.section{ padding:36px 0 }
+.section h2{
+  margin:0 0 12px;
+  font-size:1.35rem;
+  letter-spacing:-0.01em;
+}
+.section h2::after{ content:""; display:block; width:44px; height:3px; margin-top:10px; background:var(--border); border-radius:3px; }
+.section h2::before{ content:""; display:block; width:44px; height:3px; margin:0 0 6px 0; background: var(--primary-blue); background: var(--gradient-accent); border-radius:3px }
+.section p{ margin:0; color:var(--muted) }
+
+/* Cards */
+.card-grid{ margin-top:18px; display:grid; gap:22px; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)) }
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px 18px 16px;
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.card:hover{ transform:translateY(-3px); box-shadow:var(--shadow); border-color:#cdeafe }
+.card h3{ margin:0 0 6px; font-size:1.05rem }
+.card p{ margin:0; color:var(--muted); line-height:1.55 }
+
+/* Features section cards - tuned for longer text */
+#features .card{ padding:20px 20px 18px; border-left:4px solid var(--primary-blue); background:
+  linear-gradient(180deg, rgba(14,165,233,0.03), rgba(20,184,166,0.02)); }
+#features .card h3{ font-size:1.08rem; margin-bottom:8px }
+#features .card p{ color: var(--text); font-size:1.02rem; line-height:1.7 }
+
+/* About section lead */
+#about p{
+  margin-top:6px;
+  display:block;
+  background: var(--surface);
+  border:1px solid var(--border);
+  border-left:5px solid var(--primary-blue);
+  border-radius:12px;
+  padding:14px 16px;
+  color: var(--text);
+  font-size:1.05rem;
+  line-height:1.7;
+}
+
+/* Output (report) formatting */
+.card pre{
+  white-space:pre-wrap;
+  margin:0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 1.06rem; /* medium */
+  line-height: 1.75;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(14,165,233,0.05), rgba(20,184,166,0.03)),
+    repeating-linear-gradient(0deg, rgba(14,165,233,0.035) 0 32px, rgba(14,165,233,0.06) 32px 33px);
+  border:1px solid var(--border);
+  border-left:5px solid var(--primary-blue);
+  border-radius: 12px;
+  padding:16px 18px;
+  overflow:auto;
+  max-height: 60vh; /* keep very long outputs scrollable */
+}
+
+.card h3{
+  margin-bottom: .6rem;
+}
+
+/* Decorative underline for card titles */
+.card h3::after{
+  content:"";
+  display:block;
+  width:60px;
+  height:3px;
+  margin-top:8px;
+  background: var(--gradient-accent);
+  border-radius:3px;
+}
+
+/* Nicer scrollbars for the report block (Chromium/WebKit) */
+.card pre::-webkit-scrollbar{ height:10px; width:10px }
+.card pre::-webkit-scrollbar-track{ background: transparent }
+.card pre::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, var(--primary-blue), var(--primary-purple));
+  border-radius:10px;
+}
+
+/* Text selection inside report */
+.card pre::selection{ background: rgba(14,165,233,0.24) }
+
+/* Responsiveness */
+@media (max-width: 600px){
+  .card pre{ font-size:1rem; padding:14px; max-height: 55vh }
+}
+
+/* Dark mode tuning for report */
+@media (prefers-color-scheme: dark){
+  .card pre{
+    background:
+      linear-gradient(180deg, rgba(14,165,233,0.08), rgba(20,184,166,0.05)),
+      repeating-linear-gradient(0deg, rgba(14,165,233,0.08) 0 32px, rgba(14,165,233,0.12) 32px 33px);
+    border-color:#25304a;
+  }
+}
+
+/* Emphasize cards that contain a preformatted report (progressive enhancement) */
+.card:has(pre){
+  box-shadow: var(--shadow);
+  border-color: #d5d9f3;
+}
+
+/* Button styles */
+.btn{
+  -webkit-appearance: none;
+  appearance: none;
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:.5rem;
+  padding:.72rem 1.05rem;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#f4f6fb;
+  color:var(--text);
+  font-weight:600;
+  letter-spacing:.01em;
+  text-decoration:none;
+  cursor:pointer;
+  transition: transform .16s ease, box-shadow .16s ease, filter .16s ease, background-color .16s ease, border-color .16s ease;
+}
+
+.btn.primary{
+  border:0;
+  color:white;
+  background: var(--gradient-accent);
+  box-shadow: 0 10px 22px rgba(14,165,233,0.18), 0 6px 14px rgba(20,184,166,0.16);
+}
+
+.btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow) }
+.btn.primary:hover{ filter: brightness(1.05) saturate(1.05) }
+.btn:active{ transform: translateY(0) scale(.99) }
+.btn:disabled{ opacity:.6; cursor:not-allowed; filter:saturate(.8) }
+
+.btn:focus-visible{
+  outline:none;
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.35), 0 10px 22px rgba(20,184,166,0.18);
+}
+
+/* Footer */
+.site-footer{ margin-top:28px; padding:28px 0; border-top:1px solid var(--border); color:var(--muted); font-size:.95rem; text-align:center }
+
+/* Analyze form */
+.analyze-form form{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.input{
+  flex:1;
+  min-width:260px;
+  padding:.7rem .9rem;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font:inherit;
+  background:#fff;
+  transition: box-shadow .16s ease, border-color .16s ease;
+}
+.input::placeholder{ color:#94a3b8 }
+.input:focus{ outline:none; border-color:#bae6fd; box-shadow: 0 0 0 3px rgba(14,165,233,0.18) }
+
+/* Variants */
+.card.error{ border-left:5px solid #f43f5e; background: linear-gradient(180deg, rgba(254,226,226,.55), rgba(255,255,255,.85)) }
+.card.report{ border-left:5px solid var(--primary-blue) }
+
+/* Dark mode (optional) */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b1220;
+    --bg-gradient:
+      radial-gradient(900px 520px at 15% 0%, rgba(14,165,233,.18), rgba(14,165,233,0) 60%),
+      radial-gradient(900px 520px at 85% 12%, rgba(20,184,166,.16), rgba(20,184,166,0) 55%),
+      linear-gradient(180deg, #0f1324 0%, #0b1220 100%);
+    --surface:#0f172a; --text:#e5e7eb; --muted:#a3acc2; --border:#25304a
+  }
+  .card{ border-color:#25304a }
+  .site-footer{ border-color:#25304a }
+}
