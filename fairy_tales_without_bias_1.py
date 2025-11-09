@@ -135,12 +135,40 @@ def analyze_book_from_url(book_url: str, title: str):
 url_cinderella = "https://www.gutenberg.org/files/23303/23303-h/23303-h.htm?utm_source=chatgpt.com"
 url_beauty_beast = "https://www.gutenberg.org/cache/epub/7074/pg7074-images.html"
 
-# Run analysis
-results = [
+def pretty_print_report(result):
+        print(f"\n📖 Title: {result['title']}\n")
 
-    analyze_book_from_url(url_cinderella, "Cinderella"),
-    analyze_book_from_url(url_beauty_beast, "Beauty & the Beast")
-]
+        print("👥 Gender Bias:")
+        print(f"- Gender Balance Score: {result['gender_balance_score']}")
+        print(f"- Gender Mentions: Male = {result['gender_mentions']['male']}, Female = {result['gender_mentions']['female']}")
+
+        if result['gender_mentions']['male'] > result['gender_mentions']['female'] * 1.5:
+            print("  → Heavily biased toward male representation.\n")
+        elif result['gender_mentions']['female'] > result['gender_mentions']['male'] * 1.5:
+            print("  → Heavily biased toward female representation.\n")
+        else:
+            print("  → Relatively balanced gender representation.\n")
+
+
+        print("🎭 Role Diversity:")
+        print(f"- Role Diversity Score: {result['role_diversity_score']}")
+        print(f"  → {'Roles are well distributed across characters.' if result['role_diversity_score'] > 7 else 'Characters tend to be boxed into one or two common roles.' if result['role_diversity_score'] >= 4 else 'Highly stereotypical and limited roles.'}\n")
+
+        print("🧠 Stereotype Bias:")
+        print(f"- Stereotype Penalty: {result['stereotype_penalty']}")
+        print(f"  → {'Minimal use of stereotypes.' if result['stereotype_penalty'] > 7 else 'Some stereotypical language is used, but not excessively.' if result['stereotype_penalty'] >= 4 else 'Frequent stereotypical or biased language detected.'}")
+        print("-" * 50)
+
+
+if __name__ == "__main__":
+        # When run directly, perform example analysis. Importing this module won't trigger heavy work.
+        results = [
+                analyze_book_from_url(url_cinderella, "Cinderella"),
+                analyze_book_from_url(url_beauty_beast, "Beauty & the Beast")
+        ]
+
+        for result in results:
+                pretty_print_report(result)
 
 def pretty_print_report(result):
     print(f"\n📖 Title: {result['title']}\n")
